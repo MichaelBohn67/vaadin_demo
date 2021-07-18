@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-  Account findAccountByAccountNumber(String accountNumber);
+  Account findAccountByAccountNumber(Long accountNumber);
 
   List<Account> findAccountsByCreateDate(LocalDate createDate);
 

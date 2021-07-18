@@ -31,9 +31,9 @@ class AccountServiceTest {
 
   @Test
   void givenAccountNumberReturnAccount() {
-    when(repositoryMock.findAccountByAccountNumber(accountMock.getAccountNumber().toString())).thenReturn(accountMock);
+    when(repositoryMock.findAccountByAccountNumber(accountMock.getAccountNumber())).thenReturn(accountMock);
 
-    Account result = service.findByAccountNumber(accountMock.getAccountNumber().toString());
+    Account result = service.findByAccountNumber(accountMock.getAccountNumber());
 
     assertThat(result, is(accountMock));
   }

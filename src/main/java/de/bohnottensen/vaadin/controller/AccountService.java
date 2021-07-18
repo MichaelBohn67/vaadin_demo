@@ -33,7 +33,7 @@ public class AccountService {
    * @param accountNumber the account number
    * @return the account
    */
-  public Account findByAccountNumber(@Valid String accountNumber) {
+  public Account findByAccountNumber(@Valid Long accountNumber) {
     return repository.findAccountByAccountNumber(accountNumber);
   }
 

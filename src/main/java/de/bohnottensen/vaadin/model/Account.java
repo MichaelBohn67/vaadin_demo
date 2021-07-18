@@ -20,5 +20,4 @@ public class Account {
   private LocalDate createDate;
 
 
-
 }
