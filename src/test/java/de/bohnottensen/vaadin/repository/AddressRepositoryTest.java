@@ -7,15 +7,16 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
 class AddressRepositoryTest {
 
   @Autowired
-  AddressRepository addressRepository;
+  private AddressRepository addressRepository;
 
   @Autowired
-  TestEntityManager entityManager;
+  private TestEntityManager entityManager;
 
   @Test
   void givenAddress_whenSaved_thenSuccess() {
@@ -31,6 +32,30 @@ class AddressRepositoryTest {
 
     assertThat(entityManager.find(Address.class, insertedAddress.getId())).isEqualTo(newAddress);
     entityManager.flush();
+  }
+
+  @Test
+  public void testFindAddressByStreetAndNumberAndCityAndCountry() {
+    Address address = new Address();
+    address.setNumber("Number");
+    address.setCountry("Country");
+    address.setId(123L);
+    address.setCity("Oxford");
+    address.setCountryIso2("Country Iso2");
+    address.setPostCode("OX1 1PT");
+    address.setStreet("Street");
+
+    Address address1 = new Address();
+    address1.setNumber("Number");
+    address1.setCountry("Country");
+    address1.setId(123L);
+    address1.setCity("Oxford");
+    address1.setCountryIso2("Country Iso2");
+    address1.setPostCode("OX1 1PT");
+    address1.setStreet("Street");
+    addressRepository.save(address);
+    addressRepository.save(address1);
+    assertNull(addressRepository.findAddressByStreetAndNumberAndCityAndCountry("foo", "foo", "foo", "foo"));
   }
 
   @Test

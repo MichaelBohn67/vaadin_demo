@@ -10,15 +10,17 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
 class AccountRepositoryTest {
 
   @Autowired
-  AccountRepository accountRepository;
+  private AccountRepository accountRepository;
 
   @Autowired
-  TestEntityManager entityManager;
+  private TestEntityManager entityManager;
 
   @Test
   void givenNewAccount_whenSaved_thenSuccess() {
@@ -31,6 +33,38 @@ class AccountRepositoryTest {
 
     assertThat(entityManager.find(Account.class, insertedAccount.getId())).isEqualTo(account);
 
+  }
+
+  @Test
+  void testFindAccountByAccountNumber() {
+    Account account = new Account();
+    account.setCreateDate(LocalDate.ofEpochDay(1L));
+    account.setId(123L);
+    account.setAccountNumber(1234567890L);
+
+    Account account1 = new Account();
+    account1.setCreateDate(LocalDate.ofEpochDay(1L));
+    account1.setId(123L);
+    account1.setAccountNumber(1234567890L);
+    accountRepository.save(account);
+    accountRepository.save(account1);
+    assertNull(accountRepository.findAccountByAccountNumber(3L));
+  }
+
+  @Test
+  void testFindAccountsByCreateDate() {
+    Account account = new Account();
+    account.setCreateDate(LocalDate.ofEpochDay(1L));
+    account.setId(123L);
+    account.setAccountNumber(1234567890L);
+
+    Account account1 = new Account();
+    account1.setCreateDate(LocalDate.ofEpochDay(1L));
+    account1.setId(123L);
+    account1.setAccountNumber(1234567890L);
+    accountRepository.save(account);
+    accountRepository.save(account1);
+    assertEquals(1, accountRepository.findAccountsByCreateDate(LocalDate.ofEpochDay(1L)).size());
   }
 
   @Test

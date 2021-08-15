@@ -28,7 +28,7 @@ public class MainView extends VerticalLayout {
       todoList.add(checkbox);
     });
 
-      add(new H1("Welcome to MainView"),
+    add(new H1("Welcome to MainView"),
         todoList,
         new HorizontalLayout(
             taskField,

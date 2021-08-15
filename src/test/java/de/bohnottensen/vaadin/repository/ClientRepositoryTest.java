@@ -12,10 +12,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ClientRepositoryTest {
 
   @Autowired
-  ClientRepository repository;
+  private ClientRepository repository;
 
   @Autowired
-  TestEntityManager entityManager;
+  private TestEntityManager entityManager;
 
   @Test
   void givenClient_whenSaved_thenSuccess() {

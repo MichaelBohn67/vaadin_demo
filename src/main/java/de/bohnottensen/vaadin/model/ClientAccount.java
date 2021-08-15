@@ -15,9 +15,9 @@ public class ClientAccount {
   @Id
   private Long id;
   @ManyToOne
-  @JoinColumn(name="ID_CLIENT", nullable=false)
+  @JoinColumn(name = "ID_CLIENT", nullable = false)
   private Client idClient;
   @ManyToOne
-  @JoinColumn(name="ID_ACCOUNT", nullable=false)
+  @JoinColumn(name = "ID_ACCOUNT", nullable = false)
   private Account idAccount;
 }
